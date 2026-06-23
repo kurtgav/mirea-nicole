@@ -1,0 +1,279 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   DESIGN TOKENS  —  Plum & Gold debut palette
+   Drawn from "three expressions of plum" + foil-gold accents
+   ============================================================ */
+@theme {
+  /* surfaces */
+  --color-ink: #07030f;
+  --color-night: #0a0418;
+  --color-plum-950: #100525;
+  --color-plum-900: #160831;
+  --color-plum-800: #1f0d42;
+  --color-plum-700: #2a1147;
+  --color-plum-600: #3a1860;
+
+  /* gold foil */
+  --color-gold: #e6c98f;
+  --color-gold-100: #fff7ea;
+  --color-gold-200: #fbf3e6;
+  --color-gold-300: #efe0c2;
+  --color-gold-500: #e6c98f;
+  --color-gold-600: #dcae73;
+  --color-gold-700: #c79355;
+
+  /* lavender / orchid accents */
+  --color-orchid: #c79ad6;
+  --color-orchid-soft: #dcc0ea;
+  --color-orchid-dim: #bfa0d2;
+
+  /* text */
+  --color-cream: #f4e7d4;
+  --color-mist: #ece0ef;
+
+  /* type */
+  --font-script: 'Great Vibes', cursive;
+  --font-serif: 'Cormorant Garamond', 'Garamond', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis owns scrolling */
+  overflow-x: clip; /* contain reveal transforms — no horizontal jiggle */
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--color-night);
+  color: var(--color-mist);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(230, 201, 143, 0.28);
+  color: #fff;
+}
+
+/* slim plum scrollbar (when Lenis is not on touch) */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold-600), var(--color-plum-600));
+  border-radius: 999px;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   TYPE HELPERS
+   ============================================================ */
+.font-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.tracking-eyebrow {
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Gold foil text — animated sheen sweeping across the gradient */
+.foil {
+  background: linear-gradient(
+    100deg,
+    #e9d6b5 0%,
+    #fff7ea 24%,
+    #e6c98f 48%,
+    #fff7ea 66%,
+    #dcae73 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 9s linear infinite;
+}
+.foil-bright {
+  background: linear-gradient(
+    100deg,
+    #efe4cf 0%,
+    #fffaf0 30%,
+    #f5ebd6 50%,
+    #fffaf0 70%,
+    #ece0c6 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 11s linear infinite;
+}
+
+/* Glass surface */
+.glass {
+  background: rgba(28, 12, 52, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 201, 143, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 18px 44px rgba(0, 0, 0, 0.4);
+}
+
+/* gold gradient hairline border via mask */
+.gold-ring {
+  position: relative;
+}
+.gold-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(234, 217, 176, 0.7) 0%,
+    rgba(230, 201, 143, 0.2) 22%,
+    rgba(230, 201, 143, 0) 45%,
+    rgba(230, 201, 143, 0) 58%,
+    rgba(230, 201, 143, 0.22) 80%,
+    rgba(234, 217, 176, 0.7) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(230, 201, 143, 0.6);
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes shimmer {
+  0% {
+    background-position: -160% center;
+  }
+  100% {
+    background-position: 260% center;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes spinSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes flutter {
+  0%,
+  100% {
+    transform: rotate(-6deg) scaleX(1);
+  }
+  50% {
+    transform: rotate(6deg) scaleX(0.82);
+  }
+}
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-7px);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .foil,
+  .foil-bright {
+    animation: none;
+  }
+}

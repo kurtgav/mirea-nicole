@@ -11,7 +11,7 @@ type LayerProps = {
   /** parallax strength: + drifts up faster than the page, − lags behind */
   speed?: number
   eager?: boolean
-  /** take on the hue of the velvet behind it (distant clouds, ruins, hills) */
+  /** take on the hue of the sky behind it (distant clouds, ruins, hills) */
   tint?: boolean
 }
 

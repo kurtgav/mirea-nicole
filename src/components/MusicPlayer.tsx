@@ -114,7 +114,7 @@ export function MusicPlayer() {
         onClick={() => controllerRef.current?.togglePlay()}
         aria-pressed={on}
         aria-label={on ? `Pause music (${MUSIC.title})` : 'Play music'}
-        className="frame-notch caps flex size-full cursor-pointer touch-manipulation select-none items-center justify-center gap-3 bg-[rgba(5,7,22,.78)] px-4 text-[11px] text-gold-light backdrop-blur-sm transition-[scale,background-color] duration-200 ease-out [-webkit-tap-highlight-color:transparent] hover:bg-[rgba(5,7,22,.9)] active:scale-[0.96] sm:text-[10px]"
+        className="frame-notch caps flex size-full cursor-pointer touch-manipulation select-none items-center justify-center gap-3 bg-[rgba(30,29,28,.55)] px-4 text-[11px] text-gold-light backdrop-blur-sm transition-[scale,background-color] duration-200 ease-out [-webkit-tap-highlight-color:transparent] hover:bg-[rgba(30,29,28,.9)] active:scale-[0.96] sm:text-[10px]"
       >
         <span aria-hidden className="flex h-4 items-end gap-[3px] sm:h-3.5">
           {[0, 1, 2, 3].map((i) => (

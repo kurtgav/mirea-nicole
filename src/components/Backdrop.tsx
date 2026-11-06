@@ -1,8 +1,7 @@
 /**
- * Fixed page backdrop — the reference's velvet drapes (emerald → teal →
- * navy → royal → plum → burgundy) with aged-paper mottling, rendered once
- * into /greek/velvet.webp. A faint astrolabe ring sits behind the content,
- * and a grain layer above everything gives statues the same printed finish.
+ * Fixed page backdrop — a painted cloud sky (/greek/sky.webp), toned down to the
+ * mock's muted sepia so ivory and gold text stay readable, with a darker heart
+ * behind the copy. A grain layer above everything gives it a printed finish.
  */
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
@@ -10,9 +9,10 @@ const GRAIN =
 export function Backdrop() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-ink">
-      <div className="absolute inset-0 bg-[url(/greek/velvet.webp)] bg-[length:100%_100%]" />
-      {/* the mock's darker navy heart behind the copy */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_42%_55%_at_50%_45%,rgba(8,12,40,.45),transparent_75%)]" />
+      <div className="absolute inset-0 bg-[url(/greek/sky.webp)] bg-cover bg-center [filter:sepia(.35)_saturate(.8)_brightness(.76)_contrast(1.04)]" />
+      {/* veil + darker slate heart behind the centred copy; clouds stay brighter at the edges */}
+      <div className="absolute inset-0 bg-[rgba(22,22,24,.18)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_75%_at_50%_50%,rgba(30,33,40,.6),rgba(30,33,40,.3)_60%,transparent_100%)]" />
     </div>
   )
 }

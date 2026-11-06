@@ -38,7 +38,7 @@ function AccordionItem({ q, a, isOpen, onToggle, id }: { q: string; a: string; i
             transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
             className="overflow-hidden"
           >
-            <p className="m-0 pb-7 pl-[30px] pr-2 text-[19px] italic leading-[1.65] text-ivory/80">{a}</p>
+            <p className="m-0 pb-7 pl-[30px] pr-2 text-[19px] italic leading-[1.65] text-ivory/95">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>

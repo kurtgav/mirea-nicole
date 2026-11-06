@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PARTICIPANTS } from '../../data/content'
+import { COURT_NOTE, PARTICIPANTS } from '../../data/content'
 import { cn } from '../../lib/cn'
 import { Layer, Ornament } from '../ui/Layer'
 import { Reveal } from '../ui/Reveal'
@@ -20,11 +20,11 @@ function GroupCard({ group, index, hidden }: { group: Group; index: number; hidd
         name={index % 2 ? 'banner-purple' : 'banner-green'}
         className="absolute left-1/2 top-[-6px] w-[46px] -translate-x-1/2 drop-shadow-[0_8px_14px_rgba(0,0,0,.45)]"
       />
-      <h3 className="relative z-10 m-0 font-display [text-shadow:0_2px_10px_rgba(5,7,22,.9)] text-[22px] font-normal uppercase tracking-[0.16em] text-ivory" style={{ textIndent: '0.16em' }}>
+      <h3 className="relative z-10 m-0 font-display [text-shadow:0_2px_10px_rgba(30,29,28,.9)] text-[22px] font-normal uppercase tracking-[0.16em] text-ivory" style={{ textIndent: '0.16em' }}>
         {group.label}
       </h3>
       <Ornament name="divider-short" className="mt-3 w-[120px] opacity-80" />
-      <ol className="m-0 mt-5 list-none space-y-[6px] p-0 text-center text-[18px] italic leading-[1.45] text-ivory/85">
+      <ol className="m-0 mt-5 list-none space-y-[6px] p-0 text-center text-[18px] italic leading-[1.45] text-ivory/95">
         {group.names.map((name, i) => (
           <li key={`${name}-${i}`}>{name}</li>
         ))}
@@ -62,7 +62,7 @@ export function Court() {
               onClick={() => setActive(g.id)}
               className={cn(
                 'caps cursor-pointer border-b bg-transparent px-1 py-3 text-[11px] transition-colors',
-                active === g.id ? 'border-gold text-gold-light' : 'border-gold/20 text-ivory/60',
+                active === g.id ? 'border-gold text-gold-light' : 'border-gold/20 text-ivory/90',
               )}
             >
               {g.label}
@@ -75,6 +75,12 @@ export function Court() {
             <GroupCard key={g.id} group={g} index={i} hidden={active !== g.id} />
           ))}
         </div>
+
+        <Reveal className="frame-notch frame-notch-navy mx-auto mt-14 flex w-fit max-w-full flex-col items-center gap-1 px-[clamp(20px,4vw,44px)] py-3 text-center sm:flex-row sm:gap-3">
+          <span className="caps text-[11px] text-gold-light">Note</span>
+          <span aria-hidden className="hidden h-4 w-px bg-gold/50 sm:block" />
+          <p className="m-0 text-[17px] italic leading-snug text-ivory text-balance">{COURT_NOTE}</p>
+        </Reveal>
       </div>
     </section>
   )

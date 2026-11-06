@@ -37,7 +37,7 @@ export function About() {
           ))}
         </div>
         <Reveal delay={0.35}>
-          <p className="caps mx-auto mt-9 max-w-[46ch] text-[11px] leading-[2.1] text-gold-light/80">{ABOUT.theme}</p>
+          <p className="caps mx-auto mt-9 max-w-[46ch] text-[11px] leading-[2.1] text-gold-light">{ABOUT.theme}</p>
         </Reveal>
         <Reveal delay={0.45} className="mt-8 flex justify-center">
           <Ornament name="star-lg" className="anim-twinkle w-[26px]" />

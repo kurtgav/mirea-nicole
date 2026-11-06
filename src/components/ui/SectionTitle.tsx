@@ -44,7 +44,7 @@ export function SectionTitle({ title, sub, id, className }: SectionTitleProps) {
       </Reveal>
       {sub && (
         <Reveal delay={0.1}>
-          <p className="mx-auto mt-4 max-w-[520px] text-[clamp(18px,2vw,21px)] italic text-ivory/80 text-balance">{sub}</p>
+          <p className="mx-auto mt-4 max-w-[520px] text-[clamp(18px,2vw,21px)] italic text-ivory/95 text-balance">{sub}</p>
         </Reveal>
       )}
     </div>

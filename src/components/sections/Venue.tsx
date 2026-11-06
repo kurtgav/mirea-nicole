@@ -27,7 +27,21 @@ export function Venue() {
         </Reveal>
         <Reveal delay={0.26}>
           <p className="m-0 mt-3 text-[clamp(21px,2.4vw,27px)] italic text-ivory/90">{EVENT.venueSub}</p>
-          <p className="caps m-0 mt-3 text-[11px] leading-[2] text-gold-light/80">{EVENT.area}</p>
+          <p className="caps m-0 mt-3 text-[11px] leading-[2] text-gold-light">{EVENT.area}</p>
+        </Reveal>
+
+        <Reveal delay={0.3} className="mx-auto mt-10 w-[min(400px,100%)]">
+          <figure className="frame m-0 p-2 shadow-[0_24px_60px_rgba(0,0,0,.5)]">
+            <img
+              src="/greek/venue-medusa.webp"
+              width={476}
+              height={588}
+              alt="The arched, lit entrance of Medusa BGC at night"
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full"
+            />
+          </figure>
         </Reveal>
 
         <Reveal delay={0.34} className="mt-10 flex justify-center">

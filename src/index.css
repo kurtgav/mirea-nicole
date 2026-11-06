@@ -11,7 +11,7 @@
   --color-royal: #210e3a;
   --color-plum: #390a39;
   --color-burgundy: #460e2d;
-  --color-ink: #070a1c;
+  --color-ink: #1b1a19;
 
   --color-gold: #c9a96a;
   --color-gold-light: #e8d3a2;
@@ -49,6 +49,8 @@ body {
   color: var(--color-ivory);
   font-family: var(--font-serif);
   font-size: 18px;
+  /* keeps ivory and gold text readable over the bright parts of the cloud sky */
+  text-shadow: 0 1px 10px rgba(27, 26, 25, 0.6), 0 0 2px rgba(27, 26, 25, 0.35);
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -67,7 +69,7 @@ body {
   background: var(--color-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-emerald), var(--color-gold-deep), var(--color-burgundy));
+  background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold-deep));
   border-radius: 999px;
 }
 
@@ -129,6 +131,7 @@ html.lenis body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  text-shadow: none; /* would paint over the clipped gradient */
   filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.45));
 }
 
@@ -139,6 +142,7 @@ html.lenis body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  text-shadow: none;
   animation: sheen 10s linear infinite;
 }
 
@@ -168,20 +172,26 @@ html.lenis body {
 /* notched double-rule frame (the mock's RSVP button) — 9-slice SVG, crisp at any size */
 .frame-notch {
   border: 13px solid transparent;
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='%23090e28' fill-opacity='.6'/%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='none' stroke='%23c9a96a' stroke-opacity='.9'/%3E%3Cpath d='M8.8 4H31.2A9 9 0 0 0 36 8.8V31.2A9 9 0 0 0 31.2 36H8.8A9 9 0 0 0 4 31.2V8.8A9 9 0 0 0 8.8 4Z' fill='none' stroke='%23c9a96a' stroke-opacity='.5'/%3E%3C/svg%3E") 13 fill / 13px stretch;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='%231e1d1c' fill-opacity='.6'/%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='none' stroke='%23c9a96a' stroke-opacity='.9'/%3E%3Cpath d='M8.8 4H31.2A9 9 0 0 0 36 8.8V31.2A9 9 0 0 0 31.2 36H8.8A9 9 0 0 0 4 31.2V8.8A9 9 0 0 0 8.8 4Z' fill='none' stroke='%23c9a96a' stroke-opacity='.5'/%3E%3C/svg%3E") 13 fill / 13px stretch;
 }
 .frame-notch:hover {
   border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='%233a2f1c' fill-opacity='.55'/%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='none' stroke='%23c9a96a' stroke-opacity='1'/%3E%3Cpath d='M8.8 4H31.2A9 9 0 0 0 36 8.8V31.2A9 9 0 0 0 31.2 36H8.8A9 9 0 0 0 4 31.2V8.8A9 9 0 0 0 8.8 4Z' fill='none' stroke='%23c9a96a' stroke-opacity='.75'/%3E%3C/svg%3E");
 }
 
+/* navy-filled plaque variant (court note); static, so it keeps the same look on hover */
+.frame-notch.frame-notch-navy,
+.frame-notch.frame-notch-navy:hover {
+  border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='%230f2333' fill-opacity='.94'/%3E%3Cpath d='M6 .5H34A5.5 5.5 0 0 0 39.5 6V34A5.5 5.5 0 0 0 34 39.5H6A5.5 5.5 0 0 0 .5 34V6A5.5 5.5 0 0 0 6 .5Z' fill='none' stroke='%23c9a96a' stroke-opacity='.95'/%3E%3Cpath d='M8.8 4H31.2A9 9 0 0 0 36 8.8V31.2A9 9 0 0 0 31.2 36H8.8A9 9 0 0 0 4 31.2V8.8A9 9 0 0 0 8.8 4Z' fill='none' stroke='%23c9a96a' stroke-opacity='.6'/%3E%3C/svg%3E");
+}
+
 /* frosted dark panel for lists and cards */
 .panel {
-  background: linear-gradient(180deg, rgba(9, 12, 34, 0.62), rgba(9, 12, 34, 0.42));
+  background: linear-gradient(180deg, rgba(30, 29, 28, 0.62), rgba(30, 29, 28, 0.42));
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* distant layers take the hue of the velvet behind them (luminosity blend), dimmed like the mock */
+/* distant layers take the hue of the sky behind them (luminosity blend), dimmed like the mock */
 .tint {
   mix-blend-mode: luminosity;
 }
@@ -189,9 +199,9 @@ html.lenis body {
   filter: brightness(0.74) contrast(0.92);
 }
 
-/* marble statues: muted like the mock, so they sit inside the velvet light */
+/* marble statues: warm and muted like the mock, so they sit inside the sky's light */
 .statue img {
-  filter: saturate(0.72) brightness(0.93) contrast(0.96);
+  filter: sepia(0.3) saturate(0.7) brightness(0.92) contrast(0.96);
 }
 
 /* decorative image layers fade into the page instead of ending on a hard edge */

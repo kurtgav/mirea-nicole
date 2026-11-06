@@ -36,17 +36,14 @@ export function Hero() {
       {/* plain wrapper on purpose: an animated/opaque parent would isolate the tinted (blend) layers */}
       <div className="absolute inset-0">
         <Rings className="absolute left-1/2 top-[44%] w-[min(640px,92vw)] -translate-x-1/2 -translate-y-1/2 text-gold/[0.13]" />
-        <Layer name="cloud-xl" tint className="right-[-14%] top-[9%] w-[62vw] opacity-75 lg:right-[-6%] lg:top-[10%] lg:w-[34vw]" speed={0.3} eager />
-        <Layer name="cloud-xl" tint className="left-[-14%] top-[9%] w-[62vw] opacity-75 lg:left-[-6%] lg:top-[10%] lg:w-[34vw]" imgClassName="-scale-x-100" speed={0.3} eager />
-        {/* statues are untinted, so these transformed wrappers don't break the cloud blending */}
+        {/* temple's cloud base rests on the hero's bottom line: no vertical parallax, scale anchored at the bottom */}
         <motion.div
           className="pointer-events-none absolute inset-0"
           style={reduce ? undefined : { x: templeX, scale: stageScale, transformOrigin: '100% 100%' }}
         >
           <Layer
             name="temple-clouds"
-            className="statue bottom-[-1%] right-[-26%] w-[86vw] sm:right-[-14%] sm:w-[62vw] lg:bottom-[2%] lg:right-[-13%] lg:w-[clamp(380px,46vw,760px)]"
-            speed={0.12}
+            className="statue bottom-0 right-[-26%] w-[86vw] sm:right-[-14%] sm:w-[62vw] lg:right-[-13%] lg:w-[clamp(380px,46vw,760px)]"
             eager
           />
         </motion.div>
@@ -91,7 +88,7 @@ export function Hero() {
           {HERO.tagline}
         </motion.p>
 
-        <motion.p {...rise(0.65)} className="caps m-0 mt-3 max-w-[34ch] text-[clamp(10px,1vw,12px)] sm:max-w-none leading-[1.9] text-ivory/65">
+        <motion.p {...rise(0.65)} className="caps m-0 mt-3 max-w-[34ch] text-[clamp(10px,1vw,12px)] sm:max-w-none leading-[1.9] text-ivory/90">
           {HERO.sub}
         </motion.p>
 

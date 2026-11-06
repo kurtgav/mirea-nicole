@@ -42,7 +42,7 @@ export function Nav() {
       <motion.header
         className={cn(
           'fixed inset-x-0 top-0 z-[60] transition-[background-color,backdrop-filter] duration-500',
-          scrolled && !open ? 'bg-[rgba(7,10,28,.62)] backdrop-blur-md' : 'bg-transparent',
+          scrolled && !open ? 'bg-[rgba(30,29,28,.62)] backdrop-blur-md' : 'bg-transparent',
         )}
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export function Nav() {
                   aria-current={active === link.id ? 'true' : undefined}
                   className={cn(
                     'caps relative cursor-pointer bg-transparent px-0 py-2 text-[12px] transition-colors duration-300',
-                    active === link.id ? 'text-gold-light' : 'text-ivory/80 hover:text-gold-light',
+                    active === link.id ? 'text-gold-light' : 'text-ivory/95 hover:text-gold-light',
                   )}
                 >
                   {link.label}
@@ -100,7 +100,7 @@ export function Nav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="frame flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-[6px] bg-[rgba(9,14,40,.45)] lg:hidden"
+            className="frame flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-[6px] bg-[rgba(30,29,28,.45)] lg:hidden"
           >
             <motion.span
               className="block h-px w-5 bg-gold-light"
@@ -123,7 +123,7 @@ export function Nav() {
           <motion.div
             id="mobile-menu"
             className="fixed inset-0 z-[50] flex flex-col items-center justify-center gap-[clamp(10px,2.6vh,22px)] px-6 lg:hidden"
-            style={{ background: 'rgba(7,10,28,.94)', backdropFilter: 'blur(18px)' }}
+            style={{ background: 'rgba(30,29,28,.94)', backdropFilter: 'blur(18px)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

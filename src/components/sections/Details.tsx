@@ -57,7 +57,7 @@ function Countdown() {
             <span className="gold-text font-display text-[clamp(30px,4.4vw,52px)] tabular-nums">
               <Rolling value={u.value} />
             </span>
-            <span className="caps text-[9px] text-ivory/60 sm:text-[10px]">{u.label}</span>
+            <span className="caps text-[9px] text-ivory/90 sm:text-[10px]">{u.label}</span>
           </div>
         </div>
       ))}
@@ -94,12 +94,12 @@ export function Details() {
                     <button
                       type="button"
                       onClick={() => scrollToId(f.to!)}
-                      className="cursor-pointer bg-transparent p-0 text-[18px] italic text-ivory/75 underline decoration-gold/40 underline-offset-4 transition-colors hover:text-gold-light"
+                      className="cursor-pointer bg-transparent p-0 text-[18px] italic text-ivory/90 underline decoration-gold/40 underline-offset-4 transition-colors hover:text-gold-light"
                     >
                       {f.note}
                     </button>
                   ) : (
-                    <span className="text-[18px] italic text-ivory/75">{f.note}</span>
+                    <span className="text-[18px] italic text-ivory/90">{f.note}</span>
                   )}
                 </dd>
               </Reveal>
@@ -108,7 +108,7 @@ export function Details() {
         </div>
 
         <Reveal delay={0.2} className="frame panel mx-auto mt-14 w-fit max-w-full px-[clamp(18px,4vw,48px)] py-7">
-          <p className="caps m-0 mb-5 text-[11px] text-gold-light/80">Counting down to the night</p>
+          <p className="caps m-0 mb-5 text-[11px] text-gold-light">Counting down to the night</p>
           <Countdown />
         </Reveal>
 
@@ -120,7 +120,7 @@ export function Details() {
         </Reveal>
       </div>
 
-      {/* ruins on the horizon, tinted into the velvet like the mock */}
+      {/* ruins on the horizon, tinted into the sky like the mock */}
       <Layer name="column-ivy" tint className="left-[-6%] top-[-2%] w-[26vw] opacity-55 lg:left-[0%] lg:w-[clamp(130px,12vw,190px)] lg:opacity-70" imgClassName="fade-bottom" speed={-0.06} />
       <Layer name="arch" tint className="right-[-18%] top-[18%] hidden w-[38vw] opacity-60 sm:block lg:right-[-6%] lg:w-[clamp(220px,24vw,360px)]" imgClassName="fade-bottom" speed={0.08} />
       <Layer name="acropolis-b" tint className="bottom-0 left-[-30%] w-[110vw] -scale-x-100 opacity-70 lg:left-[-6%] lg:w-[52vw]" imgClassName="fade-bottom" speed={0.04} />

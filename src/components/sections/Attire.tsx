@@ -1,4 +1,4 @@
-import { DRESS_AVOID, DRESS_NOTE, DRESS_PALETTE } from '../../data/content'
+import { DRESS_AVOID, DRESS_CODE, DRESS_PALETTE } from '../../data/content'
 import { Layer } from '../ui/Layer'
 import { Reveal } from '../ui/Reveal'
 import { SectionTitle } from '../ui/SectionTitle'
@@ -37,13 +37,25 @@ export function Attire() {
       />
 
       <div className="relative z-10 mx-auto max-w-[980px] text-center">
-        <SectionTitle
-          title="The Attire"
-          id="attire-title"
-          sub="Guests are invited to dress in the colours of the evening."
-        />
+        <SectionTitle title="Dress Code" id="attire-title" sub="Formal attire, in the jewel tones of the evening." />
 
-        <ul className="m-0 mt-12 grid list-none grid-cols-3 gap-x-3 gap-y-8 p-0 sm:grid-cols-6 sm:gap-4">
+        <ul className="m-0 mt-12 grid list-none gap-4 p-0 sm:grid-cols-3">
+          {DRESS_CODE.rules.map((r, i) => (
+            <li key={r.who}>
+              <Reveal delay={0.08 * i} className="frame panel flex h-full flex-col items-center justify-center gap-2 px-6 py-6">
+                <span className="caps text-[11px] text-gold-light">{r.who}</span>
+                <span className="font-display text-[clamp(18px,1.8vw,21px)] uppercase tracking-[0.08em] text-ivory">{r.what}</span>
+                {'detail' in r && <span className="text-[17px] italic leading-snug text-ivory/90 text-balance">{r.detail}</span>}
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+        <p className="m-0 mx-auto mt-6 max-w-[56ch] text-[17px] italic leading-snug text-ivory/95 text-balance">
+          * {DRESS_CODE.note}
+        </p>
+
+        <p className="caps m-0 mt-14 text-[11px] text-gold-light">{DRESS_CODE.paletteNote}</p>
+        <ul className="m-0 mt-8 grid list-none grid-cols-3 gap-x-3 gap-y-8 p-0 sm:grid-cols-6 sm:gap-4">
           {DRESS_PALETTE.map((c, i) => (
             <li key={c.name}>
               <Reveal delay={0.08 * i} className="group flex flex-col items-center gap-3">
@@ -51,18 +63,14 @@ export function Attire() {
                   className="frame h-[clamp(150px,22vw,320px)] w-full rounded-t-full shadow-[0_18px_40px_rgba(0,0,0,.45)] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-2 [&::before]:rounded-t-full"
                   style={fabricStyle(c.x, c.hex)}
                 />
-                <span className="caps text-[10px] leading-snug text-ivory/85 sm:text-[11px]">{c.name}</span>
+                <span className="caps text-[10px] leading-snug text-ivory/95 sm:text-[11px]">{c.name}</span>
               </Reveal>
             </li>
           ))}
         </ul>
 
-        <div className="mx-auto mt-14 grid max-w-[760px] gap-5 sm:grid-cols-2">
-          <Reveal delay={0.2} className="frame panel flex flex-col items-center justify-center gap-2 px-7 py-6">
-            <span className="caps text-[11px] text-gold-light">For the Roses</span>
-            <p className="m-0 text-[clamp(19px,2vw,22px)] italic text-ivory">{DRESS_NOTE}</p>
-          </Reveal>
-          <Reveal delay={0.28} className="frame panel flex flex-col items-center justify-center gap-3 px-7 py-6">
+        <div className="mx-auto mt-14 max-w-[420px]">
+          <Reveal delay={0.2} className="frame panel flex flex-col items-center justify-center gap-3 px-7 py-6">
             <span className="caps text-[11px] text-gold-light">Kindly Avoid</span>
             <div className="flex items-center gap-4">
               {DRESS_AVOID.colors.map((c) => (
@@ -79,7 +87,7 @@ export function Attire() {
                 </span>
               ))}
             </div>
-            <p className="m-0 text-[17px] italic leading-snug text-ivory/80 text-balance">{DRESS_AVOID.note}</p>
+            <p className="m-0 text-[17px] italic leading-snug text-ivory/95 text-balance">{DRESS_AVOID.note}</p>
           </Reveal>
         </div>
       </div>

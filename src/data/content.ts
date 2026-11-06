@@ -43,7 +43,7 @@ export const HERO = {
 export const NAV_LINKS = [
   { id: 'about', label: 'About' },
   { id: 'details', label: 'Details' },
-  { id: 'attire', label: 'Attire' },
+  { id: 'attire', label: 'Dress Code' },
   { id: 'court', label: 'The Court' },
   { id: 'venue', label: 'Venue' },
   { id: 'rsvp', label: 'RSVP' },
@@ -68,7 +68,16 @@ export const DRESS_PALETTE = [
   { name: 'Burgundy', hex: '#460e2d', x: [502, 562] },
 ] as const
 
-export const DRESS_NOTE = 'Roses wear navy blue suits.'
+/** What each group wears — shown above the colour palette. */
+export const DRESS_CODE = {
+  rules: [
+    { who: 'Ladies', what: 'Evening Dress', detail: 'Midi-to-Long' },
+    { who: 'Gentlemen', what: 'Semi-formal Suit', detail: 'Long-sleeved Polo or Coat & Tie with Slacks' },
+    { who: '18 Roses', what: 'Navy Blue Suit' },
+  ],
+  note: 'Shorts and denim jeans are strictly not allowed in favor of formal attire.',
+  paletteNote: 'Guests may wear these dark jewel-toned colors.',
+} as const
 
 /** Reserved for the debutante's gown — guests are asked not to wear these. */
 export const DRESS_AVOID = {
@@ -78,6 +87,9 @@ export const DRESS_AVOID = {
   ],
   note: 'Kindly avoid caramel and champagne — these shades are reserved for the debutante’s gown.',
 } as const
+
+/** Shown under the participant lists in The Court. */
+export const COURT_NOTE = 'Participants in the 18 Roses must wear Navy Blue Suits.'
 
 /** Ceremonial participants, in the order listed in the doc. */
 export const PARTICIPANTS = [
@@ -123,7 +135,7 @@ export const PARTICIPANTS = [
 export const FAQ = [
   {
     q: 'Is there a dress code?',
-    a: 'Yes — guests are invited to dress in the evening’s palette of emerald, teal, midnight navy, royal purple, plum and burgundy. Roses wear navy blue suits. Kindly avoid caramel and champagne — those are reserved for the debutante’s gown.',
+    a: 'Yes — ladies in evening dresses (midi-to-long), gentlemen in semi-formal suits (long-sleeved polo, or coat and tie, with slacks), and the 18 Roses in navy blue suits. Shorts and denim jeans are not allowed. Guests may wear the dark jewel tones of the evening — emerald, teal, midnight navy, royal purple, plum and burgundy. Kindly avoid caramel and champagne — those are reserved for the debutante’s gown.',
   },
   {
     q: 'What is the theme?',

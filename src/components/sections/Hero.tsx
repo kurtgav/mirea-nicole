@@ -7,13 +7,13 @@ import { RsvpButton } from '../ui/RsvpButton'
 import { CalendarIcon, ClockIcon } from '../ui/Icons'
 import { Rings } from '../Backdrop'
 
-const rise = (entered: boolean, delay: number) => ({
+const rise = (delay: number) => ({
   initial: { opacity: 0, y: 24, filter: 'blur(8px)' },
-  animate: entered ? { opacity: 1, y: 0, filter: 'blur(0px)' } : undefined,
+  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
   transition: { duration: 1.3, ease: EASE_OUT_EXPO, delay },
 })
 
-export function Hero({ entered }: { entered: boolean }) {
+export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -70,37 +70,37 @@ export function Hero({ entered }: { entered: boolean }) {
         className="relative z-10 flex flex-col items-center px-6 text-center"
         style={reduce ? undefined : { y: contentY, opacity: contentOpacity, scale: contentScale }}
       >
-        <motion.div {...rise(entered, 0.1)}>
+        <motion.div {...rise(0.1)}>
           <Ornament name="wreath-sm" className="w-[clamp(74px,8vw,104px)]" />
         </motion.div>
 
-        <motion.p {...rise(entered, 0.25)} className="caps m-0 mt-5 text-[clamp(11px,1.2vw,14px)] tracking-[0.34em] text-gold-light">
+        <motion.p {...rise(0.25)} className="caps m-0 mt-5 text-[clamp(11px,1.2vw,14px)] tracking-[0.34em] text-gold-light">
           {HERO.eyebrow}
         </motion.p>
 
         <motion.h1
           id="hero-title"
-          {...rise(entered, 0.4)}
+          {...rise(0.4)}
           className="marble-text m-0 mt-2 font-title text-[clamp(64px,11.5vw,168px)] font-normal leading-[1] tracking-[0.02em]"
           style={{ textIndent: '0.02em' }}
         >
           {HERO.title}
         </motion.h1>
 
-        <motion.p {...rise(entered, 0.55)} className="m-0 mt-3 text-[clamp(22px,2.6vw,32px)] italic text-ivory/90">
+        <motion.p {...rise(0.55)} className="m-0 mt-3 text-[clamp(22px,2.6vw,32px)] italic text-ivory/90">
           {HERO.tagline}
         </motion.p>
 
-        <motion.p {...rise(entered, 0.65)} className="caps m-0 mt-3 max-w-[34ch] text-[clamp(10px,1vw,12px)] sm:max-w-none leading-[1.9] text-ivory/65">
+        <motion.p {...rise(0.65)} className="caps m-0 mt-3 max-w-[34ch] text-[clamp(10px,1vw,12px)] sm:max-w-none leading-[1.9] text-ivory/65">
           {HERO.sub}
         </motion.p>
 
-        <motion.div {...rise(entered, 0.75)} className="mt-6 w-[min(320px,78vw)]">
+        <motion.div {...rise(0.75)} className="mt-6 w-[min(320px,78vw)]">
           <Ornament name="divider-star" className="w-full opacity-90" />
         </motion.div>
 
         <motion.dl
-          {...rise(entered, 0.85)}
+          {...rise(0.85)}
           className="caps m-0 mt-6 flex flex-col items-center gap-3 text-[clamp(13px,1.3vw,16px)] tracking-[0.16em] text-ivory sm:flex-row sm:gap-6"
         >
           <div className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export function Hero({ entered }: { entered: boolean }) {
           </div>
         </motion.dl>
 
-        <motion.div {...rise(entered, 1)} className="mt-9">
+        <motion.div {...rise(1)} className="mt-9">
           <RsvpButton />
         </motion.div>
 

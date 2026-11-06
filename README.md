@@ -1,12 +1,12 @@
 # Mirea Nicole Lomeda — A Debut Invitation
 
-A vintage-luxe, gold-on-plum debut invitation. Vite + React 19 + TypeScript + Tailwind v4, with Motion, GSAP ScrollTrigger and Lenis smooth scroll. Opens with a ribbon-tied vintage scroll loader and a scroll-scrubbed cinematic background.
+MIREA — a Greek-mythology debut invitation (December 13, 2026 · 4PM onwards). Vite + React 19 + TypeScript + Tailwind v4, with Motion parallax and Lenis smooth scroll. Marble statues, temples and clouds are independent transparent layers over a velvet backdrop in the guest dress palette.
 
 ## Local
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+npm run dev        # http://localhost:5173
 npm run build      # type-check + production build → dist/
 npm run preview    # preview the production build
 ```
@@ -34,7 +34,12 @@ vercel --prod     # promote to production → https://mirea-nicole.vercel.app
 
 If the project was named something else, rename it under **Settings → General → Project Name**; the `.vercel.app` domain follows the project name. (`mirea-nicole.vercel.app` must be available in your scope.)
 
+## Editing content
+
+- **All copy lives in `src/data/content.ts`** — date, time, venue, palette, ceremonial participants, FAQ.
+- **RSVP link:** set `LUMA_RSVP_URL` in `src/data/content.ts`. Every RSVP button reads it and opens in a new tab.
+
 ## Notes
 
-- Large static assets live in `public/media/` (background video + scroll/frame images) and are cached immutably for one year.
+- Decorative layers live in `public/greek/*.webp` (transparent cut-outs from the Greek asset packs; intrinsic sizes in `src/lib/assets.ts`). `velvet.webp` is the page backdrop. Cached immutably for one year.
 - No router — single page with in-page anchor navigation; the SPA rewrite is a safety net.

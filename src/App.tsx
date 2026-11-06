@@ -1,26 +1,23 @@
 import { useCallback, useEffect, useState } from 'react'
+import { AnimatePresence } from 'motion/react'
 import { useSmoothScroll, startScroll, stopScroll } from './lib/smoothScroll'
-import { BackgroundVideo } from './components/BackgroundVideo'
-import { ParticleField } from './components/ParticleField'
+import { Backdrop, Grain } from './components/Backdrop'
 import { ScrollProgress } from './components/ScrollProgress'
-import { GoldFrame } from './components/GoldFrame'
 import { Nav } from './components/Nav'
+import { Footer } from './components/Footer'
 import { Preloader } from './components/Preloader'
 import { Hero } from './components/sections/Hero'
-import { Countdown } from './components/sections/Countdown'
+import { About } from './components/sections/About'
 import { Details } from './components/sections/Details'
-import { Moment } from './components/sections/Moment'
-import { TheEighteen } from './components/sections/TheEighteen'
-import { Timeline } from './components/sections/Timeline'
-import { DressCode } from './components/sections/DressCode'
-import { Location } from './components/sections/Location'
+import { Attire } from './components/sections/Attire'
+import { Court } from './components/sections/Court'
+import { Venue } from './components/sections/Venue'
 import { Faq } from './components/sections/Faq'
 import { Rsvp } from './components/sections/Rsvp'
 
 export default function App() {
   useSmoothScroll()
   const [loading, setLoading] = useState(true)
-  const [entered, setEntered] = useState(false)
 
   // lock scrolling behind the curtain
   useEffect(() => {
@@ -33,33 +30,28 @@ export default function App() {
     }
   }, [loading])
 
-  const handleComplete = useCallback(() => {
-    setEntered(true)
-    setLoading(false)
-  }, [])
+  const handleComplete = useCallback(() => setLoading(false), [])
 
   return (
     <>
-      <BackgroundVideo />
-      <ParticleField />
+      <Backdrop />
+      <Grain />
       <ScrollProgress />
-      <GoldFrame />
       <Nav />
 
-      <main className="relative z-10">
-        <Hero entered={entered} />
-        <Countdown />
+      <main className="relative">
+        <Hero entered={!loading} />
+        <About />
         <Details />
-        <Moment />
-        <TheEighteen />
-        <Timeline />
-        <DressCode />
-        <Location />
+        <Attire />
+        <Court />
+        <Venue />
         <Faq />
         <Rsvp />
       </main>
+      <Footer />
 
-      {loading && <Preloader onComplete={handleComplete} />}
+      <AnimatePresence>{loading && <Preloader onComplete={handleComplete} />}</AnimatePresence>
     </>
   )
 }

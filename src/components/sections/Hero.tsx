@@ -1,122 +1,111 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, type Variants } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { EVENT, HERO } from '../../data/content'
-import { Divider } from '../ui/Ornaments'
-import { scrollToId } from '../../lib/smoothScroll'
 import { EASE_OUT_EXPO } from '../../lib/motion'
+import { Layer, Ornament } from '../ui/Layer'
+import { RsvpButton } from '../ui/RsvpButton'
+import { CalendarIcon, ClockIcon } from '../ui/Icons'
+import { Rings } from '../Backdrop'
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.16, delayChildren: 0.1 } },
-}
-const item: Variants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: EASE_OUT_EXPO } },
-}
-const nameLine: Variants = {
-  hidden: { opacity: 0, y: 48, filter: 'blur(12px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.5, ease: EASE_OUT_EXPO } },
-}
+const rise = (entered: boolean, delay: number) => ({
+  initial: { opacity: 0, y: 24, filter: 'blur(8px)' },
+  animate: entered ? { opacity: 1, y: 0, filter: 'blur(0px)' } : undefined,
+  transition: { duration: 1.3, ease: EASE_OUT_EXPO, delay },
+})
 
 export function Hero({ entered }: { entered: boolean }) {
   const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-  const y = useTransform(scrollYProgress, [0, 1], [0, 110])
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
 
   return (
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-[100svh] flex-col"
-      data-label="Hero"
+      aria-labelledby="hero-title"
+      className="relative flex min-h-[100svh] flex-col items-center overflow-hidden pt-[clamp(96px,14vh,150px)] lg:justify-center lg:pt-[80px]"
     >
-      <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 flex flex-1 flex-col items-center justify-center px-[clamp(20px,5vw,40px)] pb-[clamp(72px,12vh,100px)] pt-[clamp(96px,18vh,128px)] text-center"
-      >
-        <motion.div variants={container} initial="hidden" animate={entered ? 'show' : 'hidden'}>
-          <motion.p
-            variants={item}
-            className="m-0 mb-[26px] text-[12px] font-light uppercase tracking-eyebrow text-[rgba(243,230,207,.85)]"
-            style={{ textShadow: '0 1px 16px rgba(0,0,0,.6)' }}
-          >
-            {HERO.eyebrow}
-          </motion.p>
-
-          <h1
-            className="m-0 font-script leading-[1.16]"
-            style={{
-              fontSize: 'clamp(52px,11vw,168px)',
-              padding: '.18em .12em .26em',
-              filter: 'drop-shadow(0 4px 30px rgba(0,0,0,.6))',
-            }}
-          >
-            <motion.span variants={nameLine} className="foil-bright block px-[.06em]">
-              {EVENT.celebrantFirst}
-            </motion.span>
-            <motion.span variants={nameLine} className="foil block -mt-[.04em] px-[.06em]">
-              {EVENT.celebrantLast}
-            </motion.span>
-          </h1>
-
-          <motion.div variants={item} className="mt-[30px] flex justify-center">
-            <Divider width={50} />
-          </motion.div>
-
-          <motion.p
-            variants={item}
-            className="mx-auto mt-6 max-w-[520px] text-[clamp(14px,1.6vw,17px)] font-light leading-[1.9] tracking-[0.02em] text-[rgba(244,236,247,.92)] text-balance"
-            style={{ textShadow: '0 1px 18px rgba(0,0,0,.6)' }}
-          >
-            {HERO.intro}
-          </motion.p>
-
-          <motion.div variants={item} className="mt-10 flex flex-col items-center gap-7">
-            <button
-              type="button"
-              onClick={() => scrollToId('celebration')}
-              data-cursor
-              className="gold-ring group relative overflow-hidden rounded-full px-10 py-4 text-[12px] uppercase tracking-[0.22em] text-[rgba(251,243,230,.96)] backdrop-blur-md transition-all duration-300"
-              style={{ background: 'rgba(255,255,255,.06)', boxShadow: 'inset 0 1px 1px rgba(255,255,255,.16)' }}
-            >
-              <span
-                aria-hidden
-                className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-              />
-              {HERO.cta}
-            </button>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
-              {HERO.meta.map((m) => (
-                <span
-                  key={m}
-                  className="text-[11px] font-light uppercase tracking-[0.3em] text-[rgba(236,224,239,.9)]"
-                  style={{ textShadow: '0 1px 14px rgba(0,0,0,.6)' }}
-                >
-                  {m}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* scroll cue — fades out as the hero parallaxes away */}
-      <motion.div
-        className="pointer-events-none absolute inset-x-0 bottom-[clamp(20px,4vh,38px)] z-10 flex flex-col items-center gap-2"
-        style={{ opacity }}
-      >
-        <span className="text-[10px] uppercase tracking-eyebrow text-[rgba(236,224,239,.7)]">Scroll</span>
-        <motion.span
-          className="block h-7 w-px"
-          style={{ background: 'linear-gradient(180deg,var(--color-gold),transparent)' }}
-          animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+      {/* ---- stage layers: bust left, temple on clouds right (as in the mock) ---- */}
+      {/* plain wrapper on purpose: an animated/opaque parent would isolate the tinted (blend) layers */}
+      <div className="absolute inset-0">
+        <Rings className="absolute left-1/2 top-[44%] w-[min(640px,92vw)] -translate-x-1/2 -translate-y-1/2 text-gold/[0.13]" />
+        <Layer name="cloud-xl" tint className="right-[-14%] top-[9%] w-[62vw] opacity-75 lg:right-[-6%] lg:top-[10%] lg:w-[34vw]" speed={0.3} eager />
+        <Layer name="cloud-xl" tint className="left-[-14%] top-[9%] w-[62vw] opacity-75 lg:left-[-6%] lg:top-[10%] lg:w-[34vw]" imgClassName="-scale-x-100" speed={0.3} eager />
+        <Layer
+          name="temple-clouds"
+          className="statue bottom-[-1%] right-[-26%] w-[86vw] sm:right-[-14%] sm:w-[62vw] lg:bottom-[2%] lg:right-[-13%] lg:w-[clamp(380px,46vw,760px)]"
+          speed={0.12}
+          eager
         />
+        <Layer
+          name="bust-lg"
+          className="statue bottom-[-6%] left-[-22%] w-[74vw] sm:left-[-10%] sm:w-[60vw] lg:bottom-[-12%] lg:left-[-9%] lg:w-[clamp(420px,45vw,820px)]"
+          speed={0.08}
+          eager
+        />
+        <Layer name="star-sm" className="anim-twinkle left-[37%] top-[18%] w-[10px]" eager />
+        <Layer name="star-sm" className="anim-twinkle right-[34%] top-[40%] w-[8px] [animation-delay:1.5s]" eager />
+      </div>
+
+      {/* ---- invitation copy ---- */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center px-6 text-center"
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+      >
+        <motion.div {...rise(entered, 0.1)}>
+          <Ornament name="wreath-sm" className="w-[clamp(74px,8vw,104px)]" />
+        </motion.div>
+
+        <motion.p {...rise(entered, 0.25)} className="caps m-0 mt-5 text-[clamp(11px,1.2vw,14px)] tracking-[0.34em] text-gold-light">
+          {HERO.eyebrow}
+        </motion.p>
+
+        <motion.h1
+          id="hero-title"
+          {...rise(entered, 0.4)}
+          className="marble-text m-0 mt-2 font-title text-[clamp(64px,11.5vw,168px)] font-normal leading-[1] tracking-[0.02em]"
+          style={{ textIndent: '0.02em' }}
+        >
+          {HERO.title}
+        </motion.h1>
+
+        <motion.p {...rise(entered, 0.55)} className="m-0 mt-3 text-[clamp(22px,2.6vw,32px)] italic text-ivory/90">
+          {HERO.tagline}
+        </motion.p>
+
+        <motion.p {...rise(entered, 0.65)} className="caps m-0 mt-3 max-w-[34ch] text-[clamp(10px,1vw,12px)] sm:max-w-none leading-[1.9] text-ivory/65">
+          {HERO.sub}
+        </motion.p>
+
+        <motion.div {...rise(entered, 0.75)} className="mt-6 w-[min(320px,78vw)]">
+          <Ornament name="divider-star" className="w-full opacity-90" />
+        </motion.div>
+
+        <motion.dl
+          {...rise(entered, 0.85)}
+          className="caps m-0 mt-6 flex flex-col items-center gap-3 text-[clamp(13px,1.3vw,16px)] tracking-[0.16em] text-ivory sm:flex-row sm:gap-6"
+        >
+          <div className="flex items-center gap-3">
+            <dt className="sr-only">Date</dt>
+            <CalendarIcon className="h-[18px] w-[18px] text-gold" />
+            <dd className="m-0">{EVENT.dateLabel}</dd>
+          </div>
+          <span aria-hidden className="hidden h-6 w-px bg-gold/60 sm:block" />
+          <div className="flex items-center gap-3">
+            <dt className="sr-only">Time</dt>
+            <ClockIcon className="h-[18px] w-[18px] text-gold" />
+            <dd className="m-0">{EVENT.timeLabel}</dd>
+          </div>
+        </motion.dl>
+
+        <motion.div {...rise(entered, 1)} className="mt-9">
+          <RsvpButton />
+        </motion.div>
+
+        {/* keeps the copy clear of the statues on small screens */}
+        <div aria-hidden className="h-[64vw] sm:h-[48vw] lg:hidden" />
       </motion.div>
     </section>
   )

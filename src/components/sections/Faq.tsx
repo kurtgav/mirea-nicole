@@ -1,50 +1,44 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { FAQ, REMINDERS } from '../../data/content'
-import { SectionHeading } from '../ui/SectionHeading'
-import { Reveal } from '../ui/Reveal'
+import { FAQ } from '../../data/content'
 import { EASE_OUT_EXPO } from '../../lib/motion'
+import { Reveal } from '../ui/Reveal'
+import { SectionTitle } from '../ui/SectionTitle'
+import { Layer } from '../ui/Layer'
 
-function AccordionItem({
-  q,
-  a,
-  isOpen,
-  onToggle,
-}: {
-  q: string
-  a: string
-  isOpen: boolean
-  onToggle: () => void
-}) {
+function AccordionItem({ q, a, isOpen, onToggle, id }: { q: string; a: string; isOpen: boolean; onToggle: () => void; id: string }) {
   return (
-    <div className="glass overflow-hidden rounded-[14px]">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        data-cursor
-        className="flex w-full items-center gap-4 bg-transparent px-6 py-[22px] text-left font-serif text-[clamp(19px,4.8vw,23px)] font-medium text-[#f4e7d4]"
-      >
-        <motion.span
-          className="block h-[9px] w-[9px] flex-none bg-gold"
-          style={{ boxShadow: '0 0 10px rgba(230,201,143,.5)' }}
-          animate={{ rotate: isOpen ? 225 : 45 }}
-          transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
-        />
-        <span className="flex-1">{q}</span>
-      </button>
+    <div className="border-b border-gold/25">
+      <h3 className="m-0">
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={id}
+          className="flex w-full cursor-pointer items-center gap-4 bg-transparent px-1 py-6 text-left font-display text-[clamp(15px,1.6vw,18px)] font-normal uppercase tracking-[0.1em] text-ivory transition-colors hover:text-gold-light"
+        >
+          <motion.span
+            aria-hidden
+            className="text-[12px] text-gold"
+            animate={{ rotate: isOpen ? 45 : 0 }}
+            transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+          >
+            ✦
+          </motion.span>
+          <span className="flex-1">{q}</span>
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            id={id}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
             className="overflow-hidden"
           >
-            <p className="m-0 px-6 pb-6 pl-[49px] text-[14px] font-light leading-[1.85] text-[rgba(236,224,239,.8)]">
-              {a}
-            </p>
+            <p className="m-0 pb-7 pl-[30px] pr-2 text-[19px] italic leading-[1.65] text-ivory/80">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -56,55 +50,22 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section
-      id="faq"
-      className="relative px-6 pb-[clamp(60px,9vh,110px)] pt-[clamp(40px,7vh,90px)]"
-      data-label="FAQ"
-    >
-      <div className="mx-auto max-w-[680px]">
-        <SectionHeading eyebrow="Good to Know" title="FAQ & Reminders" className="mb-12" />
-
-        <Reveal>
-          <p className="mb-[18px] text-[11px] uppercase tracking-[0.4em] text-[var(--color-orchid)]" style={{ textIndent: '0.4em' }}>
-            Frequently Asked
-          </p>
-        </Reveal>
-
-        <div className="flex flex-col gap-3">
+    <section id="faq" aria-labelledby="faq-title" className="relative overflow-hidden border-t border-gold/20 px-6 py-[clamp(90px,13vh,150px)]">
+      <Layer name="column-plain" tint className="bottom-0 left-[2%] hidden w-[clamp(140px,12vw,190px)] opacity-60 lg:block" imgClassName="fade-bottom" speed={0.08} />
+      <Layer name="cloud-puff" tint className="right-[-4%] top-[18%] hidden w-[18vw] opacity-50 lg:block" speed={0.2} />
+      <div className="relative z-10 mx-auto max-w-[720px]">
+        <SectionTitle title="Good to Know" id="faq-title" />
+        <Reveal delay={0.1} className="mt-10 border-t border-gold/25">
           {FAQ.map((f, i) => (
-            <Reveal key={f.q} delay={i * 0.08}>
-              <AccordionItem
-                q={f.q}
-                a={f.a}
-                isOpen={open === i}
-                onToggle={() => setOpen(open === i ? null : i)}
-              />
-            </Reveal>
+            <AccordionItem
+              key={f.q}
+              id={`faq-${i}`}
+              q={f.q}
+              a={f.a}
+              isOpen={open === i}
+              onToggle={() => setOpen(open === i ? null : i)}
+            />
           ))}
-        </div>
-
-        <Reveal>
-          <p className="mb-[18px] mt-12 text-[11px] uppercase tracking-[0.4em] text-[var(--color-orchid)]" style={{ textIndent: '0.4em' }}>
-            A Few Reminders
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="glass flex flex-col rounded-[14px] px-[clamp(22px,5vw,34px)] py-[clamp(20px,5vw,30px)]">
-            {REMINDERS.map((r, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-4 py-[14px]"
-                style={{ borderBottom: i < REMINDERS.length - 1 ? '1px solid rgba(230,201,143,.12)' : 'none' }}
-              >
-                <span
-                  className="mt-[7px] block h-[7px] w-[7px] flex-none rotate-45 bg-gold"
-                  style={{ boxShadow: '0 0 8px rgba(230,201,143,.5)' }}
-                />
-                <p className="m-0 text-[15px] font-light leading-[1.75] text-[rgba(244,236,247,.88)]">{r}</p>
-              </div>
-            ))}
-          </div>
         </Reveal>
       </div>
     </section>

@@ -1,126 +1,134 @@
 /* ============================================================
    All copy & configuration for the invitation in one place.
    Edit here — every section reads from this file.
+   Source of truth: the "Compiled" Google Doc (date, time, theme,
+   guest palette, ceremonial participants).
    ============================================================ */
+
+/**
+ * RSVP — every RSVP button on the site points here and opens in a new tab.
+ * Replace the placeholder with the real Luma event link when it is ready.
+ */
+export const LUMA_RSVP_URL = 'https://luma.com/675uegvs'
 
 export const EVENT = {
   celebrant: 'Mirea Nicole Lomeda',
-  celebrantFirst: 'Mirea Nicole',
-  celebrantLast: 'Lomeda',
-  occasion: 'eighteenth birthday',
+  celebrantFirst: 'Mirea',
+  occasion: 'Eighteenth Birthday',
   /** ISO with Manila offset — drives the countdown */
-  dateISO: '2026-12-06T16:00:00+08:00',
-  dateLabel: 'December 6, 2026',
-  dateLong: 'December 6',
-  yearWords: 'Two Thousand & Twenty-Six',
-  timeLabel: '4 PM — Late Night',
-  timeLong: '4:00 in the Afternoon',
-  timeSub: 'until late into the night',
+  dateISO: '2026-12-13T16:00:00+08:00',
+  dateLabel: 'December 13, 2026',
+  timeLabel: '4PM Onwards',
+  theme:
+    'The celebration features a Greek mythology-inspired theme, incorporating classical Greek imagery and symbolism.',
   venue: 'Medusa BGC',
-  venueSub: 'at The Palace, Manila',
-  area: 'Uptown Parade, Taguig',
-  addressLine: 'Medusa · The Palace · Uptown Parade, 9th Ave, Taguig',
+  venueSub: 'at The Palace',
+  area: 'Uptown Parade, 9th Avenue, Taguig',
   mapUrl: 'https://maps.app.goo.gl/98fjdtDGAd2LdQdk6',
-  monogram: 'Mirea · XVIII',
 } as const
 
 export const HERO = {
-  eyebrow: 'You are cordially invited to the eighteenth birthday of',
-  intro:
-    'An evening of grace and celebration as Mirea steps into her eighteenth year — fine company, music, and timeless elegance await.',
-  cta: 'Save the Date',
-  meta: [EVENT.dateLabel, EVENT.timeLabel, 'Medusa BGC · The Palace'],
+  eyebrow: 'You’re invited to',
+  title: 'Mirea',
+  tagline: 'A Night of Myth and Magic',
+  sub: `The ${EVENT.occasion} of ${EVENT.celebrant}`,
 } as const
 
 export const NAV_LINKS = [
-  { id: 'celebration', label: 'Celebration' },
-  { id: 'eighteen', label: 'The Eighteen' },
-  { id: 'timeline', label: 'Programme' },
-  { id: 'location', label: 'Location' },
+  { id: 'about', label: 'About' },
+  { id: 'details', label: 'Details' },
+  { id: 'attire', label: 'Attire' },
+  { id: 'court', label: 'The Court' },
+  { id: 'venue', label: 'Venue' },
   { id: 'rsvp', label: 'RSVP' },
 ] as const
 
-export const DETAILS = [
-  {
-    kicker: 'The Date',
-    headline: EVENT.dateLong,
-    sub: EVENT.yearWords,
-  },
-  {
-    kicker: 'The Hour',
-    headline: EVENT.timeLong,
-    sub: EVENT.timeSub,
-  },
-  {
-    kicker: 'The Venue',
-    headline: EVENT.venue,
-    sub: EVENT.venueSub,
-  },
+export const ABOUT = {
+  lines: [
+    'Step into a world where legends live,\nand myths come alive.',
+    'Join us for a night inspired by the gods,\nfilled with elegance, enchantment, and timeless beauty.',
+  ],
+  theme: EVENT.theme,
+} as const
+
+/** Guest dress colour palette — sampled from the swatch photo in the doc. */
+export const DRESS_PALETTE = [
+  // x = the swatch's pixel span inside /greek/dress-palette.webp (565px wide)
+  { name: 'Emerald', hex: '#1a2f26', x: [4, 90] },
+  { name: 'Teal', hex: '#132c3e', x: [96, 168] },
+  { name: 'Midnight Navy', hex: '#09153b', x: [174, 260] },
+  { name: 'Royal Purple', hex: '#210e3a', x: [268, 374] },
+  { name: 'Plum', hex: '#390a39', x: [384, 494] },
+  { name: 'Burgundy', hex: '#460e2d', x: [502, 562] },
 ] as const
 
-export const EIGHTEEN = [
-  { label: 'Roses', note: 'Names announced soon' },
-  { label: 'Treasures', note: 'Names announced soon' },
-  { label: 'Blue Bills', note: 'Names announced soon' },
-  { label: 'Wishes', note: 'Names announced soon' },
-] as const
+export const DRESS_NOTE = 'Roses wear navy blue suits.'
 
-export const TIMELINE = [
+/** Reserved for the debutante's gown — guests are asked not to wear these. */
+export const DRESS_AVOID = {
+  colors: [
+    { name: 'Caramel', hex: '#b07a45' },
+    { name: 'Champagne', hex: '#e9d5b0' },
+  ],
+  note: 'Kindly avoid caramel and champagne — these shades are reserved for the debutante’s gown.',
+} as const
+
+/** Ceremonial participants, in the order listed in the doc. */
+export const PARTICIPANTS = [
   {
-    time: '4:00 PM',
-    title: 'Guest Arrival & Cocktails',
-    desc: 'Welcome drinks and portraits as guests are received and seated.',
+    id: 'treasures',
+    label: 'Treasures',
+    names: [
+      'Beatrize Hernandez', 'Yuen Yao', 'Lexie Malibiran', 'John De Laluna', 'Ali Jned', 'Mark Hemedes',
+      'Vienne Rodriguez', 'Sophi Delasallagas', 'Charlize Las', 'Rynel Baguinon', 'Reese Dinglasan',
+      'Alexandra Nava', 'Andrei Capio', 'Mico Ramiscal', 'Mikee Lomeda', 'Vernadette Sibulo', 'Miss. Yna',
+      'Lola RVL',
+    ],
   },
   {
-    time: '5:00 PM',
-    title: 'The Grand Entrance',
-    desc: 'Mirea makes her debut as the celebrant of the evening.',
+    id: 'roses',
+    label: 'Roses',
+    names: [
+      'Martin Lomeda', 'Michael Lomeda', 'Marion Lomeda', 'Mac Lomeda', 'Miles Lu', 'Noah Mangubat',
+      'Vienne Rodriguez', 'Andrei Capio', 'Richmond Sibulo', 'John Natividad', 'Damien Borlasa', 'Kurt Lopez',
+      'John Delaluna', 'Mark Hemedes', 'Ali Jned', 'Yuen Yao', 'Marcus Lomeda', 'Marionito Lomeda',
+    ],
   },
   {
-    time: '5:30 PM',
-    title: 'Dinner is Served',
-    desc: 'A plated feast to open the celebration in good company.',
+    id: 'shots',
+    label: 'Shots',
+    names: [
+      'Marionito Lomeda', 'Melissa Lomeda', 'Marcus Lomeda', 'Mikayla Lomeda', 'Kurt Lopez', 'Martin Lomeda',
+      'Michael Lomeda', 'Beatrize Hernandez', 'Yasmin Yao', 'Elizabeth De La Luna', 'Maria Xenia', 'AJ Parafina',
+      'Arlene Parafina', 'Rafaela Ferrer', 'Reign Breganza', 'Sydney Restor', 'Ali Delasllagas', 'John Delaluna',
+    ],
   },
   {
-    time: '7:00 PM',
-    title: 'The Eighteen',
-    desc: 'Roses, candles and treasures presented in Mirea’s honour.',
-  },
-  {
-    time: '8:30 PM',
-    title: 'Cake & Toast',
-    desc: 'A sweet pause and a heartfelt toast to the celebrant.',
-  },
-  {
-    time: '9:00 PM — Late',
-    title: 'Dancing till Late Night',
-    desc: 'Music, dancing and celebration into the early hours.',
+    id: 'bills',
+    label: 'Bills',
+    names: [
+      'Jonamay Lomeda', 'Av Lomeda', 'Abby Marquez', 'Janine Castillo', 'Ricky Parafina', 'Ronald Sibulo',
+      'Ato Javier', 'Rasoul Amadzadeh', 'Floro Regencia', 'Joe Perfecto Delaluna', 'Joe Yao', 'Mary Ann Marquez',
+      'Teresita Barrameda', 'Cherry Natividad', 'Lola Ileng Lomeda', 'Dory Lomeda',
+    ],
   },
 ] as const
 
 export const FAQ = [
   {
     q: 'Is there a dress code?',
-    a: 'A formal palette and attire will be revealed in the coming weeks — kindly watch this space for the full details.',
+    a: 'Yes — guests are invited to dress in the evening’s palette of emerald, teal, midnight navy, royal purple, plum and burgundy. Roses wear navy blue suits. Kindly avoid caramel and champagne — those are reserved for the debutante’s gown.',
+  },
+  {
+    q: 'What is the theme?',
+    a: EVENT.theme,
   },
   {
     q: 'May I bring a plus-one?',
     a: 'Seating is reserved per invitation. Plus-one details will be confirmed with your formal invite closer to the date.',
   },
   {
-    q: 'Where exactly is the venue?',
-    a: 'Medusa at The Palace, Uptown Parade, 9th Avenue, Taguig. Tap the map below to open directions in Google Maps.',
+    q: 'How do I RSVP?',
+    a: 'Tap any “RSVP” button on this page — it opens our RSVP page in a new tab.',
   },
 ] as const
-
-export const REMINDERS = [
-  'Kindly keep the evening of December 6, 2026 free — the celebration runs from late afternoon into the night.',
-  'A formal invitation with the full programme, dress code and reply details will follow in the coming months.',
-  'Please arrive a little before the programme begins so you do not miss The Grand Entrance.',
-] as const
-
-export const RSVP = {
-  headline: 'More details & RSVP\nto follow soon',
-  body:
-    'Kindly keep the date. A formal invitation with full program, dress code, and reply details will be shared in the coming months.',
-} as const

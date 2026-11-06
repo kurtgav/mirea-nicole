@@ -88,7 +88,7 @@ export const PARTICIPANTS = [
       'Beatrize Hernandez', 'Yuen Yao', 'Lexie Malibiran', 'John De Laluna', 'Ali Jned', 'Mark Hemedes',
       'Vienne Rodriguez', 'Sophi Delasallagas', 'Charlize Las', 'Rynel Baguinon', 'Reese Dinglasan',
       'Alexandra Nava', 'Andrei Capio', 'Mico Ramiscal', 'Mikee Lomeda', 'Vernadette Sibulo', 'Miss. Yna',
-      'Lola RVL',
+      'Dory Lomeda',
     ],
   },
   {
@@ -115,7 +115,7 @@ export const PARTICIPANTS = [
     names: [
       'Jonamay Lomeda', 'Av Lomeda', 'Abby Marquez', 'Janine Castillo', 'Ricky Parafina', 'Ronald Sibulo',
       'Ato Javier', 'Rasoul Amadzadeh', 'Floro Regencia', 'Joe Perfecto Delaluna', 'Joe Yao', 'Mary Ann Marquez',
-      'Teresita Barrameda', 'Cherry Natividad', 'Lola Ileng Lomeda', 'Dory Lomeda',
+      'Teresita Barrameda', 'Cherry Natividad', 'Ileng Lomeda', 'Dory Lomeda',
     ],
   },
 ] as const

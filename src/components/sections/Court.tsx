@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { COURT_NOTE, PARTICIPANTS } from '../../data/content'
+import { COURT_NOTES, PARTICIPANTS } from '../../data/content'
 import { cn } from '../../lib/cn'
 import { Layer, Ornament } from '../ui/Layer'
 import { Reveal } from '../ui/Reveal'
@@ -24,9 +24,6 @@ function GroupCard({ group, index, hidden }: { group: Group; index: number; hidd
         {group.label}
       </h3>
       <Ornament name="divider-short" className="mt-3 w-[120px] opacity-80" />
-      {'note' in group && (
-        <p className="m-0 mt-4 max-w-[30ch] text-center text-[16px] italic leading-snug text-gold-light text-balance">{group.note}</p>
-      )}
       <ol className="m-0 mt-5 list-none space-y-[6px] p-0 text-center text-[18px] italic leading-[1.45] text-ivory/95">
         {group.names.map((name, i) => (
           <li key={`${name}-${i}`}>{name}</li>
@@ -79,11 +76,19 @@ export function Court() {
           ))}
         </div>
 
-        <Reveal className="frame-notch frame-notch-navy mx-auto mt-14 flex w-fit max-w-full flex-col items-center gap-1 px-[clamp(20px,4vw,44px)] py-3 text-center sm:flex-row sm:gap-3">
-          <span className="caps text-[11px] text-gold-light">Note</span>
-          <span aria-hidden className="hidden h-4 w-px bg-gold/50 sm:block" />
-          <p className="m-0 text-[17px] italic leading-snug text-ivory text-balance">{COURT_NOTE}</p>
-        </Reveal>
+        <div className="mx-auto mt-14 grid w-fit max-w-[min(860px,100%)] gap-4">
+          {COURT_NOTES.map((note, i) => (
+            <Reveal
+              key={note}
+              delay={0.08 * i}
+              className="frame-notch frame-notch-navy flex w-full flex-col items-center justify-center gap-1 px-[clamp(20px,4vw,44px)] py-3 text-center sm:flex-row sm:gap-3"
+            >
+              <span className="caps shrink-0 text-[11px] text-gold-light">Note</span>
+              <span aria-hidden className="hidden h-4 w-px shrink-0 bg-gold/50 sm:block" />
+              <p className="m-0 text-[17px] italic leading-snug text-ivory text-balance">{note}</p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

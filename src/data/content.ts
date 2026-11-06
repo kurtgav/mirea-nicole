@@ -88,15 +88,17 @@ export const DRESS_AVOID = {
   note: 'Kindly avoid caramel and champagne — these shades are reserved for the debutante’s gown.',
 } as const
 
-/** Shown under the participant lists in The Court. */
-export const COURT_NOTE = 'Participants in the 18 Roses must wear Navy Blue Suits.'
+/** Shown under the participant lists in The Court, one plaque each. */
+export const COURT_NOTES = [
+  'Treasures: Kindly prepare a short message for the celebrant to share as you present her with your gift.',
+  'Participants in the 18 Roses must wear Navy Blue Suits.',
+] as const
 
 /** Ceremonial participants, in the order listed in the doc. */
 export const PARTICIPANTS = [
   {
     id: 'treasures',
     label: 'Treasures',
-    note: 'Kindly prepare a short message for the celebrant to share as you present her with your gift.',
     names: [
       'Beatrize Hernandez', 'Yuen Yao', 'Lexie Malibiran', 'John De Laluna', 'Ali Jned', 'Mark Hemedes',
       'Vienne Rodriguez', 'Sophi Delasallagas', 'Charlize Las', 'Rynel Baguinon', 'Reese Dinglasan',

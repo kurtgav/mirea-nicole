@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
-import { AnimatePresence } from 'motion/react'
+import { AnimatePresence, MotionConfig } from 'motion/react'
 import { useSmoothScroll, startScroll, stopScroll } from './lib/smoothScroll'
 import { Backdrop, Grain } from './components/Backdrop'
 import { ScrollProgress } from './components/ScrollProgress'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
 import { Preloader } from './components/Preloader'
+import { MusicPlayer } from './components/MusicPlayer'
 import { Hero } from './components/sections/Hero'
 import { About } from './components/sections/About'
 import { Details } from './components/sections/Details'
@@ -33,7 +34,8 @@ export default function App() {
   const handleComplete = useCallback(() => setLoading(false), [])
 
   return (
-    <>
+    // honour the OS "reduce motion" setting for every motion animation (keeps fades, drops movement)
+    <MotionConfig reducedMotion="user">
       <Backdrop />
       <Grain />
       <ScrollProgress />
@@ -50,8 +52,9 @@ export default function App() {
         <Rsvp />
       </main>
       <Footer />
+      <MusicPlayer />
 
       <AnimatePresence>{loading && <Preloader onComplete={handleComplete} />}</AnimatePresence>
-    </>
+    </MotionConfig>
   )
 }

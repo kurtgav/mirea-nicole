@@ -19,6 +19,11 @@ export function Hero({ entered }: { entered: boolean }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 120])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.92])
+  // scrolling away parts the stage like curtains: bust drifts left, temple right
+  const bustX = useTransform(scrollYProgress, [0, 1], ['0%', '-16%'])
+  const templeX = useTransform(scrollYProgress, [0, 1], ['0%', '16%'])
+  const stageScale = useTransform(scrollYProgress, [0, 1], [1, 1.08])
 
   return (
     <section
@@ -33,18 +38,29 @@ export function Hero({ entered }: { entered: boolean }) {
         <Rings className="absolute left-1/2 top-[44%] w-[min(640px,92vw)] -translate-x-1/2 -translate-y-1/2 text-gold/[0.13]" />
         <Layer name="cloud-xl" tint className="right-[-14%] top-[9%] w-[62vw] opacity-75 lg:right-[-6%] lg:top-[10%] lg:w-[34vw]" speed={0.3} eager />
         <Layer name="cloud-xl" tint className="left-[-14%] top-[9%] w-[62vw] opacity-75 lg:left-[-6%] lg:top-[10%] lg:w-[34vw]" imgClassName="-scale-x-100" speed={0.3} eager />
-        <Layer
-          name="temple-clouds"
-          className="statue bottom-[-1%] right-[-26%] w-[86vw] sm:right-[-14%] sm:w-[62vw] lg:bottom-[2%] lg:right-[-13%] lg:w-[clamp(380px,46vw,760px)]"
-          speed={0.12}
-          eager
-        />
-        <Layer
-          name="bust-lg"
-          className="statue bottom-[-6%] left-[-22%] w-[74vw] sm:left-[-10%] sm:w-[60vw] lg:bottom-[-12%] lg:left-[-9%] lg:w-[clamp(420px,45vw,820px)]"
-          speed={0.08}
-          eager
-        />
+        {/* statues are untinted, so these transformed wrappers don't break the cloud blending */}
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          style={reduce ? undefined : { x: templeX, scale: stageScale, transformOrigin: '100% 100%' }}
+        >
+          <Layer
+            name="temple-clouds"
+            className="statue bottom-[-1%] right-[-26%] w-[86vw] sm:right-[-14%] sm:w-[62vw] lg:bottom-[2%] lg:right-[-13%] lg:w-[clamp(380px,46vw,760px)]"
+            speed={0.12}
+            eager
+          />
+        </motion.div>
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          style={reduce ? undefined : { x: bustX, scale: stageScale, transformOrigin: '0% 100%' }}
+        >
+          <Layer
+            name="bust-lg"
+            className="statue bottom-[-6%] left-[-22%] w-[74vw] sm:left-[-10%] sm:w-[60vw] lg:bottom-[-12%] lg:left-[-9%] lg:w-[clamp(420px,45vw,820px)]"
+            speed={0.08}
+            eager
+          />
+        </motion.div>
         <Layer name="star-sm" className="anim-twinkle left-[37%] top-[18%] w-[10px]" eager />
         <Layer name="star-sm" className="anim-twinkle right-[34%] top-[40%] w-[8px] [animation-delay:1.5s]" eager />
       </div>
@@ -52,7 +68,7 @@ export function Hero({ entered }: { entered: boolean }) {
       {/* ---- invitation copy ---- */}
       <motion.div
         className="relative z-10 flex flex-col items-center px-6 text-center"
-        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity, scale: contentScale }}
       >
         <motion.div {...rise(entered, 0.1)}>
           <Ornament name="wreath-sm" className="w-[clamp(74px,8vw,104px)]" />

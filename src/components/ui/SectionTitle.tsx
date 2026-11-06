@@ -1,5 +1,7 @@
+import { motion } from 'motion/react'
 import { Reveal } from './Reveal'
 import { cn } from '../../lib/cn'
+import { EASE_OUT_EXPO, inView } from '../../lib/motion'
 
 type SectionTitleProps = {
   title: string
@@ -9,13 +11,27 @@ type SectionTitleProps = {
   className?: string
 }
 
+/** Gold hairline that draws outward from the title as it scrolls into view. */
+function Hairline({ from }: { from: 'left' | 'right' }) {
+  return (
+    <motion.span
+      className="hairline w-[clamp(28px,14vw,170px)] shrink"
+      style={{ transformOrigin: from }}
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={inView}
+      transition={{ duration: 1.4, ease: EASE_OUT_EXPO, delay: 0.25 }}
+    />
+  )
+}
+
 /** Engraved section heading flanked by gold hairlines — "—— ABOUT ——". */
 export function SectionTitle({ title, sub, id, className }: SectionTitleProps) {
   return (
     <div className={cn('text-center', className)}>
       <Reveal>
         <div className="flex items-center justify-center gap-[clamp(14px,2.4vw,28px)]">
-          <span className="hairline w-[clamp(28px,14vw,170px)] shrink" />
+          <Hairline from="right" />
           <h2
             id={id}
             className="m-0 whitespace-nowrap font-display text-[clamp(22px,3.6vw,40px)] font-normal uppercase tracking-[0.14em] text-ivory"
@@ -23,7 +39,7 @@ export function SectionTitle({ title, sub, id, className }: SectionTitleProps) {
           >
             {title}
           </h2>
-          <span className="hairline w-[clamp(28px,14vw,170px)] shrink" />
+          <Hairline from="left" />
         </div>
       </Reveal>
       {sub && (

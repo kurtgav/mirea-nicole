@@ -11,6 +11,12 @@
  */
 export const LUMA_RSVP_URL = 'https://luma.com/675uegvs'
 
+/** Background music — Spotify track; starts on the visitor's first click, tap or key press. */
+export const MUSIC = {
+  spotifyUri: 'spotify:track:2I7agwVrMsDR2IwPE89ppF',
+  title: 'Misty',
+} as const
+
 export const EVENT = {
   celebrant: 'Mirea Nicole Lomeda',
   celebrantFirst: 'Mirea',

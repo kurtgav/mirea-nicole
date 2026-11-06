@@ -24,6 +24,9 @@ function GroupCard({ group, index, hidden }: { group: Group; index: number; hidd
         {group.label}
       </h3>
       <Ornament name="divider-short" className="mt-3 w-[120px] opacity-80" />
+      {'note' in group && (
+        <p className="m-0 mt-4 max-w-[30ch] text-center text-[16px] italic leading-snug text-gold-light text-balance">{group.note}</p>
+      )}
       <ol className="m-0 mt-5 list-none space-y-[6px] p-0 text-center text-[18px] italic leading-[1.45] text-ivory/95">
         {group.names.map((name, i) => (
           <li key={`${name}-${i}`}>{name}</li>

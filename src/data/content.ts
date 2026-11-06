@@ -71,7 +71,7 @@ export const DRESS_PALETTE = [
 /** What each group wears — shown above the colour palette. */
 export const DRESS_CODE = {
   rules: [
-    { who: 'Ladies', what: 'Evening Dress', detail: 'Midi-to-Long' },
+    { who: 'Ladies', what: 'Strictly Long Dress' },
     { who: 'Gentlemen', what: 'Semi-formal Suit', detail: 'Long-sleeved Polo or Coat & Tie with Slacks' },
     { who: '18 Roses', what: 'Navy Blue Suit' },
   ],
@@ -96,6 +96,7 @@ export const PARTICIPANTS = [
   {
     id: 'treasures',
     label: 'Treasures',
+    note: 'Kindly prepare a short message for the celebrant to share as you present her with your gift.',
     names: [
       'Beatrize Hernandez', 'Yuen Yao', 'Lexie Malibiran', 'John De Laluna', 'Ali Jned', 'Mark Hemedes',
       'Vienne Rodriguez', 'Sophi Delasallagas', 'Charlize Las', 'Rynel Baguinon', 'Reese Dinglasan',
@@ -135,7 +136,7 @@ export const PARTICIPANTS = [
 export const FAQ = [
   {
     q: 'Is there a dress code?',
-    a: 'Yes — ladies in evening dresses (midi-to-long), gentlemen in semi-formal suits (long-sleeved polo, or coat and tie, with slacks), and the 18 Roses in navy blue suits. Shorts and denim jeans are not allowed. Guests may wear the dark jewel tones of the evening — emerald, teal, midnight navy, royal purple, plum and burgundy. Kindly avoid caramel and champagne — those are reserved for the debutante’s gown.',
+    a: 'Yes — ladies in long dresses (strictly long), gentlemen in semi-formal suits (long-sleeved polo, or coat and tie, with slacks), and the 18 Roses in navy blue suits. Shorts and denim jeans are not allowed. Guests may wear the dark jewel tones of the evening — emerald, teal, midnight navy, royal purple, plum and burgundy. Kindly avoid caramel and champagne — those are reserved for the debutante’s gown.',
   },
   {
     q: 'What is the theme?',
